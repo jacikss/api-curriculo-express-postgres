@@ -1,12 +1,13 @@
 const { Pool } = require('pg');
+require('dotenv').config(); // Garante que as variáveis de ambiente do .env sejam carregadas
 
 // Configurações de conexão com o banco de dados
 const pool = new Pool({
-  user: 'postgres',         // Seu usuário do PostgreSQL (geralmente 'postgres')
-  host: 'localhost',        // Onde o PostgreSQL está rodando (sua máquina)
-  database: 'db_curriculo',// O nome do banco de dados que criamos
-  password: 'admin', // A senha que você definiu para o usuário 'postgres'
-  port: 5432,               // A porta padrão do PostgreSQL
+  // connectionString é a forma recomendada quando se usa uma URL completa
+  connectionString: process.env.DATABASE_URL,
+  // ssl: {
+  //   rejectUnauthorized: false // Esta linha pode ser necessária dependendo do provedor/versão Node.js
+  // }
 });
 
 // Testar a conexão (opcional, mas bom para verificar se está tudo certo)
